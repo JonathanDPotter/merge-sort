@@ -1,0 +1,198 @@
+$thistle: #cdb4dbff;
+$fairy-tale: #ffc8ddff;
+$carnation-pink: #ffafccff;
+$uranian-blue: #bde0feff;
+$light-sky-blue: #a2d2ffff;
+$shadow: 0 0 3px darken($thistle, 50);
+$pink-grad: linear-gradient(to bottom right, $carnation-pink, $fairy-tale);
+
+@mixin flex-row {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin pill-shape {
+  border: none;
+  border-radius: 400px;
+  height: 3rem;
+  padding: 0 1rem;
+}
+
+@mixin button {
+  min-width: 5rem;
+  background-image: $pink-grad;
+}
+
+@mixin font-inherit {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: lighten($thistle, 10);
+  @include pill-shape;
+}
+
+::-webkit-scrollbar-thumb {
+  @include pill-shape;
+  background-image: $pink-grad;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $thistle;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline-style: dotted;
+    outline-color: $carnation-pink;
+    outline-width: 3px;
+    outline-offset: 1px;
+  }
+}
+
+body {
+  @include flex-col;
+  justify-content: space-between;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $light-sky-blue;
+  color: black;
+}
+
+header,
+main,
+footer {
+  padding: 1rem;
+}
+
+header {
+  @include flex-row;
+  height: 10vh;
+  background-image: $pink-grad;
+  box-shadow: $shadow;
+}
+
+main {
+  @include flex-col;
+  flex: 1;
+  gap: 1rem;
+
+  section {
+    @include flex-col;
+    flex: 1;
+  }
+
+  fieldset {
+    @include flex-row;
+    gap: 0.5rem;
+    border: 0.5rem solid $fairy-tale;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: $uranian-blue;
+
+    legend {
+      color: $fairy-tale;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-shadow: $shadow;
+    }
+
+    input {
+      @include pill-shape;
+      @include font-inherit;
+
+      &[type="number"] {
+        background-color: inherit;
+        border: 0.25rem solid $fairy-tale;
+        text-align: center;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+
+      &[type="submit"] {
+        @include button;
+      }
+    }
+  }
+
+  div {
+    @include flex-col;
+    justify-content: space-evenly;
+    flex: 1;
+    min-width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+}
+
+footer {
+  @include flex-row;
+  justify-content: space-between;
+  background-color: $thistle;
+  font-size: 1rem;
+
+  .buttons {
+    @include flex-row;
+    gap: 1rem;
+
+    button {
+      @include pill-shape;
+      @include button;
+      @include font-inherit;
+    }
+  }
+}
+
+dialog[open] {
+  @include flex-col;
+  background-color: white;
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  height: 80%;
+  min-width: 80%;
+  max-width: 800px;
+
+  pre {
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  input {
+    @include pill-shape;
+    @include font-inherit;
+    background-image: $pink-grad;
+    width: 100px;
+  }
+}
